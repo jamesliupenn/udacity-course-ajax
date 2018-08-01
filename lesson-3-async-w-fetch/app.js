@@ -12,7 +12,7 @@
         // Using the fetch API to send a GET request to Unsplash
         fetch(`https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`, {
 	    	headers: {
-	    		Authorization: 'Client-ID e990e0c51468af37368d9d1f96c492cfa2d1a7cff9babc661f9263d585716005'
+	    		Authorization: 'Client-ID <your_client_ID>'
 	    	}
 	    }).then((response) => {
 	    	return response.json();
@@ -23,7 +23,7 @@
 	    });
 
         // Using the fetch API to send a GET request to NYTimes
-	    fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=53243f58daa64b6393469d74d0c3d25e`, {
+	    fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=<your_API_key>`, {
 	    }).then((response) => {
 	    	return response.json();
 	    }).then((articles) => {
