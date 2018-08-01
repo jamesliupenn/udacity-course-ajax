@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ajax
 
 This is the repo for [Udacity's Ajax course](). The course covers making asynchronous requests using three different methods:
@@ -23,3 +24,6 @@ There are no special instructions for this project.
 
 * [https://twitter.com/richardkalehoff](https://twitter.com/richardkalehoff)
 * [https://github.com/richardkalehoff](https://github.com/richardkalehoff)
+=======
+# udacity-course-ajax
+>>>>>>> 8495c8c20ca6c8addf4fc917de7d8a467f3752d1
