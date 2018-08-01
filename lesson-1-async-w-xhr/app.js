@@ -23,14 +23,14 @@
 	    	requestError(err, 'image');
 	    };
 	    //Optional - set request header if needed
-		unsplashRequest.setRequestHeader('Authorization', 'Client-ID e990e0c51468af37368d9d1f96c492cfa2d1a7cff9babc661f9263d585716005');
+		unsplashRequest.setRequestHeader('Authorization', 'Client-ID <your_client_ID>');
 		//5 - Send the request
 		unsplashRequest.send();
 
 		//1
 		const articleRequest = new XMLHttpRequest();
 		//2
-		articleRequest.open('GET', `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=53243f58daa64b6393469d74d0c3d25e`);
+		articleRequest.open('GET', `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=<your_api_key>`);
 		//3
 		articleRequest.onload = addArticles;
 		//4
