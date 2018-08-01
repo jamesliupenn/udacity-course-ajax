@@ -9,7 +9,8 @@ The same project is built with each of these techniques. You'll find one folder 
 
 To test the implementations out, git clone this repo and serve up a HTTP server:
 1. Git clone this repo.
-2. Execute `python -m SimpleHTTPServer <port>` in the repo folder to serve up the HTTP server.
-3. Go to `localhost:<port>` from any browser.
+2. Update `<your_client_ID>` and `<your_API_key>` in the `app.js` in all three folders. To obtain a client ID for Unsplash and API key for NY Times, visit https://unsplash.com/developers & https://developer.nytimes.com/signup
+3. Execute `python -m SimpleHTTPServer <port>` in the repo folder to serve up the HTTP server.
+4. Go to `localhost:<port>` from any browser.
 
 Note: The original files were created by Richard Kalehoff @ https://github.com/richardkalehoff
