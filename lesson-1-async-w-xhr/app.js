@@ -8,5 +8,111 @@
         e.preventDefault();
         responseContainer.innerHTML = '';
         searchedForText = searchField.value;
+
+        /** 
+         * XHR way of sending GET requests
+         *
+        //1 - Create an XHR object with XMLHttpRequest on submission
+        const unsplashRequest = new XMLHttpRequest();
+        //2 - Fetch resource by sending a GET request
+	   	unsplashRequest.open('GET', `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`);
+	    //3 - Point this to a function when fetch is successful
+	    unsplashRequest.onload = addImage;
+	    //4 - Error handling
+	    unsplashRequest.onerror = function (err) {
+	    	requestError(err, 'image');
+	    };
+	    //Optional - set request header if needed
+		unsplashRequest.setRequestHeader('Authorization', 'Client-ID e990e0c51468af37368d9d1f96c492cfa2d1a7cff9babc661f9263d585716005');
+		//5 - Send the request
+		unsplashRequest.send();
+
+		//1
+		const articleRequest = new XMLHttpRequest();
+		//2
+		articleRequest.open('GET', `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=53243f58daa64b6393469d74d0c3d25e`);
+		//3
+		articleRequest.onload = addArticles;
+		//4
+		articleRequest.onerror = function (err) {
+			requestError(err, 'article');
+		};
+		//5
+		articleRequest.send();
+		**/
+
+		//Ajax way of sending async request
+		$.ajax({
+			url: `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`,
+			headers: 
+			{
+				Authorization: 'Client-ID e990e0c51468af37368d9d1f96c492cfa2d1a7cff9babc661f9263d585716005'
+			}
+		}).done(addImage) //When done, execute addImage
+		.fail(err => {
+			requestError(err, 'image');
+		}); //Error handling
+
+		$.ajax({
+			url: `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=53243f58daa64b6393469d74d0c3d25e`
+		}).done(addArticles) //When done, execute addArticles
+		.fail(err => {
+			requestError(err, 'articles');
+		}); //Error handling
     });
+
+    //The addImage fxn called onload
+	function addImage(images) {
+		// let htmlContent = '';
+		// const data = JSON.parse(this.responseText);
+		// const firstImage = data.results[0];
+
+		const firstImage = images.results[0];
+
+		// if (data && data.results && data.results[0]) {
+		// 	htmlContent = 
+			// `<figure>
+			// 	<img src="${firstImage.urls.regular}" alt="${searchedForText}>"
+			// 	<figcaption>${searchedForText} by ${firstImage.user.name}</figcaption>
+			// </figure>`;
+		// } else {
+		// 	htmlContent = '<div class="error-no-image">No images available</div>';
+		// }
+		
+		// responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
+		responseContainer.insertAdjacentHTML('afterbegin', `<figure>
+				<img src="${firstImage.urls.regular}" alt="${searchedForText}>"
+				<figcaption>${searchedForText} by ${firstImage.user.name}</figcaption>
+			</figure>`);
+	}
+
+	//The addArticles fxn called onload
+	function addArticles (articles) {
+		// let htmlContent = '';
+		// const data = JSON.parse(this.responseText);
+
+		// if (data.response && data.response.docs && data.response.docs.length > 1) {
+			// htmlContent = '<ul>' + data.response.docs.map(article =>
+			// 	`<li class="article">
+			// 		<h2><a href="${article.web_url}">${article.headline.main}</a></h2>
+			// 		<p>${article.snippet}</p>
+			// 	</li>`
+			// 	).join('') + '</ul>';
+		// } else {
+		// 	htmlContent = '<div class="error-no-articles">No articles available</div>';
+		// }
+
+		// responseContainer.insertAdjacentHTML('beforeend', htmlContent);
+		responseContainer.insertAdjacentHTML('beforeend', '<ul>' + articles.response.docs.map(article =>
+				`<li class="article">
+					<h2><a href="${article.web_url}">${article.headline.main}</a></h2>
+					<p>${article.snippet}</p>
+				</li>`
+				).join('') + '</ul>');
+	}
+
 })();
+
+
+
+
